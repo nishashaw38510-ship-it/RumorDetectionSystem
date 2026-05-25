@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Rumor Detection System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/futuristic.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- PARTICLE BACKGROUND -->
+<div id="particles-js"></div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+        <h1>
+            AI Rumor Detection
+        </h1>
+
+        <p>
+            Advanced misinformation intelligence system using
+            Machine Learning, NLP, OCR, and Social Media Analysis.
+        </p>
+
+        <!-- FORM -->
+        <form action="/predict"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <!-- TEXT INPUT -->
+            <div class="card">
+
+                <h3>
+                    Text Analysis
+                </h3>
+
+                <textarea
+                    name="text"
+                    placeholder="Paste social media post, tweet, article, or suspicious message..."
+                ></textarea>
+
+            </div>
+
+            <!-- URL INPUT -->
+            <div class="card">
+
+                <h3>
+                    URL Analysis
+                </h3>
+
+                <input
+                    type="text"
+                    name="url"
+                    placeholder="Paste news/article/social media URL..."
+                >
+
+            </div>
+
+            <!-- IMAGE INPUT -->
+            <div class="card">
+
+                <h3>
+                    Image OCR Analysis
+                </h3>
+
+                <div class="upload-box">
+
+                    <input
+                        type="file"
+                        name="image"
+                        id="image-upload"
+                    >
+
+                    <label for="image-upload">
+
+                        Drag & Drop or Upload Screenshot
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- ANALYZE BUTTON -->
+            <button type="submit">
+
+                Start AI Analysis
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+        <!-- CARD -->
+        <div class="card">
+
+            <h3>
+                AI Accuracy
+            </h3>
+
+            <h2 id="accuracy-counter">
+                0%
+            </h2>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="card">
+
+            <h3>
+                Active Scans
+            </h3>
+
+            <h2 id="scan-counter">
+                0
+            </h2>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="card">
+
+            <h3>
+                Threat Detection
+            </h3>
+
+            <div class="meter-container">
+
+                <div class="meter-circle">
+
+                    <span id="meter-value">
+                        0%
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LIVE CHART -->
+        <div class="card chart-card">
+
+            <canvas id="activityChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- LIVE FEED -->
+<div class="live-feed">
+
+    <h2>
+        Real-Time Threat Feed
+    </h2>
+
+    <div class="feed-container">
+
+        <div class="feed-card twitter">
+
+            <h4>
+                Political Rumor
+            </h4>
+
+            <p>
+                Viral election misinformation detected across platforms.
+            </p>
+
+        </div>
+
+        <div class="feed-card reddit">
+
+            <h4>
+                Financial Scam
+            </h4>
+
+            <p>
+                Suspicious cryptocurrency promotion identified.
+            </p>
+
+        </div>
+
+        <div class="feed-card facebook">
+
+            <h4>
+                Health Misinformation
+            </h4>
+
+            <p>
+                Fake medical treatment trend spreading rapidly.
+            </p>
+
+        </div>
+
+        <div class="feed-card youtube">
+
+            <h4>
+                Deepfake Alert
+            </h4>
+
+            <p>
+                AI-generated manipulated media under investigation.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PARTICLES -->
+<script>
+
+particlesJS("particles-js", {
+
+    particles: {
+
+        number: {
+
+            value: 100
+        },
+
+        color: {
+
+            value: "#3b82f6"
+        },
+
+        shape: {
+
+            type: "circle"
+        },
+
+        opacity: {
+
+            value: 0.5
+        },
+
+        size: {
+
+            value: 3
+        },
+
+        move: {
+
+            speed: 2
+        }
+    }
+});
+
+</script>
+
+<!-- LIVE COUNTERS -->
+<script>
+
+let accuracy = 0;
+let scans = 0;
+let threat = 0;
+
+const animation = setInterval(() => {
+
+    if(accuracy < 97){
+        accuracy++;
+    }
+
+    if(scans < 18754){
+        scans += 173;
+    }
+
+    if(threat < 91){
+        threat++;
+    }
+
+    document.getElementById("accuracy-counter").innerHTML =
+        accuracy + "%";
+
+    document.getElementById("scan-counter").innerHTML =
+        scans;
+
+    document.getElementById("meter-value").innerHTML =
+        threat + "%";
+
+    if(
+        accuracy >= 97 &&
+        scans >= 18754 &&
+        threat >= 91
+    ){
+        clearInterval(animation);
+    }
+
+}, 20);
+
+</script>
+
+<!-- CHART -->
+<script>
+
+const ctx = document.getElementById('activityChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat',
+            'Sun'
+        ],
+
+        datasets: [{
+
+            label: 'Threat Detection Activity',
+
+            data: [12, 19, 7, 22, 31, 28, 35],
+
+            borderWidth: 3,
+
+            tension: 0.4,
+
+            fill: true
+        }]
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                labels: {
+
+                    color: 'white'
+                }
+            }
+        },
+
+        scales: {
+
+            x: {
+
+                ticks: {
+
+                    color: 'white'
+                }
+            },
+
+            y: {
+
+                ticks: {
+
+                    color: 'white'
+                }
+            }
+        }
+    }
+});
+
+</script>
+
+</body>
+
+</html>

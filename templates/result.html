@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Threat Analysis</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/futuristic.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="particles-js"></div>
+
+<div class="container">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+        <h1>
+
+            AI Threat Intelligence Dashboard
+
+        </h1>
+
+        <!-- FINAL PREDICTION -->
+        <div class="card">
+
+            <h2>
+
+                Final Prediction:
+                {{ prediction }}
+
+            </h2>
+
+            <h2 id="confidence-text">
+
+                Confidence: 0%
+
+            </h2>
+
+        </div>
+
+        <!-- LIVE THREAT BOX -->
+        <div class="threat-box {{ animation_class }}">
+
+            <h2 class="threat-title">
+
+                {{ threat_level }}
+
+            </h2>
+
+            <h3 class="alert-status">
+
+                {{ alert_signal }}
+
+            </h3>
+
+        </div>
+
+        <!-- AI EXPLANATION -->
+        <div class="card explanation-box">
+
+            <h3>
+
+                AI Explanation
+
+            </h3>
+
+            <p>
+
+                {{ explanation }}
+
+            </p>
+
+        </div>
+
+        <!-- ANALYZED TEXT -->
+        <div class="card">
+
+            <h3>
+
+                Analyzed Content
+
+            </h3>
+
+            <p>
+
+                {{ user_text }}
+
+            </p>
+
+        </div>
+
+        <!-- AI CATEGORIES -->
+        <div class="card">
+
+            <h3>
+
+                AI Detection Categories
+
+            </h3>
+
+            <div class="tag-container">
+
+                {% for category in categories %}
+
+                <span class="tag">
+
+                    {{ category }}
+
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <!-- BACK BUTTON -->
+        <a href="/">
+
+            <button>
+
+                Analyze Another Content
+
+            </button>
+
+        </a>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+        <!-- RUMOR -->
+        <div class="card">
+
+            <h3>
+
+                Rumor Probability
+
+            </h3>
+
+            <h2 id="rumor-value">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <!-- NON-RUMOR -->
+        <div class="card">
+
+            <h3>
+
+                Non-Rumor Probability
+
+            </h3>
+
+            <h2 id="non-rumor-value">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <!-- ENGAGEMENT -->
+        <div class="card">
+
+            <h3>
+
+                Engagement Score
+
+            </h3>
+
+            <h2 id="engagement-value">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <!-- VIRAL -->
+        <div class="card">
+
+            <h3>
+
+                Viral Spread Score
+
+            </h3>
+
+            <h2 id="viral-value">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <!-- MANIPULATION -->
+        <div class="card">
+
+            <h3>
+
+                Manipulation Index
+
+            </h3>
+
+            <h2 id="manipulation-value">
+
+                0%
+
+            </h2>
+
+        </div>
+
+        <!-- CHART -->
+        <div class="card chart-card">
+
+            <canvas id="resultChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PARTICLES -->
+<script>
+
+particlesJS("particles-js", {
+
+    particles: {
+
+        number: {
+
+            value: 90
+        },
+
+        color: {
+
+            value: "#3b82f6"
+        },
+
+        shape: {
+
+            type: "circle"
+        },
+
+        opacity: {
+
+            value: 0.5
+        },
+
+        size: {
+
+            value: 3
+        },
+
+        move: {
+
+            speed: 2
+        }
+    }
+});
+
+</script>
+
+<!-- LIVE COUNTER -->
+<script>
+
+const rumorTarget = {{ rumor_prob }};
+const nonRumorTarget = {{ non_rumor_prob }};
+const confidenceTarget = {{ confidence }};
+const engagementTarget = {{ engagement_score }};
+const viralTarget = {{ viral_score }};
+const manipulationTarget = {{ manipulation_index }};
+
+let rumor = 0;
+let nonRumor = 0;
+let confidence = 0;
+let engagement = 0;
+let viral = 0;
+let manipulation = 0;
+
+const interval = setInterval(() => {
+
+    if(rumor < rumorTarget){
+
+        rumor++;
+    }
+
+    if(nonRumor < nonRumorTarget){
+
+        nonRumor++;
+    }
+
+    if(confidence < confidenceTarget){
+
+        confidence++;
+    }
+
+    if(engagement < engagementTarget){
+
+        engagement++;
+    }
+
+    if(viral < viralTarget){
+
+        viral++;
+    }
+
+    if(manipulation < manipulationTarget){
+
+        manipulation++;
+    }
+
+    document.getElementById("rumor-value").innerHTML =
+        rumor + "%";
+
+    document.getElementById("non-rumor-value").innerHTML =
+        nonRumor + "%";
+
+    document.getElementById("confidence-text").innerHTML =
+        "Confidence: " + confidence + "%";
+
+    document.getElementById("engagement-value").innerHTML =
+        engagement + "%";
+
+    document.getElementById("viral-value").innerHTML =
+        viral + "%";
+
+    document.getElementById("manipulation-value").innerHTML =
+        manipulation + "%";
+
+    if(
+        rumor >= rumorTarget &&
+        nonRumor >= nonRumorTarget &&
+        confidence >= confidenceTarget &&
+        engagement >= engagementTarget &&
+        viral >= viralTarget &&
+        manipulation >= manipulationTarget
+    ){
+
+        clearInterval(interval);
+    }
+
+}, 15);
+
+</script>
+
+<!-- CHART -->
+<script>
+
+const ctx = document.getElementById('resultChart');
+
+new Chart(ctx, {
+
+    type: 'radar',
+
+    data: {
+
+        labels: [
+
+            'Rumor',
+            'Non-Rumor',
+            'Engagement',
+            'Virality',
+            'Manipulation'
+        ],
+
+        datasets: [{
+
+            label: 'AI Threat Metrics',
+
+            data: [
+
+                {{ rumor_prob }},
+                {{ non_rumor_prob }},
+                {{ engagement_score }},
+                {{ viral_score }},
+                {{ manipulation_index }}
+            ],
+
+            borderWidth: 3
+        }]
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                labels: {
+
+                    color: 'white'
+                }
+            }
+        },
+
+        scales: {
+
+            r: {
+
+                pointLabels: {
+
+                    color: 'white'
+                },
+
+                ticks: {
+
+                    color: 'white',
+
+                    backdropColor: 'transparent'
+                },
+
+                grid: {
+
+                    color: 'rgba(255,255,255,0.2)'
+                }
+            }
+        }
+    }
+});
+
+</script>
+
+</body>
+
+</html>

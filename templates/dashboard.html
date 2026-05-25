@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <h1>Analytics Dashboard</h1>
+
+    <canvas id="accuracyChart"></canvas>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+</body>
+</html>

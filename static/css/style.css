@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:#0f172a;
+    overflow:hidden;
+    color:white;
+}
+
+.background-glow{
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle,#2563eb,#0f172a);
+    filter:blur(120px);
+    top:-200px;
+    left:-200px;
+    animation:floatGlow 8s infinite alternate;
+}
+
+@keyframes floatGlow{
+    from{
+        transform:translateY(0px);
+    }
+    to{
+        transform:translateY(80px);
+    }
+}
+
+.main-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    height:100vh;
+    padding:40px;
+}
+
+.glass-card{
+    width:700px;
+    padding:40px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+.glass-card h1{
+    font-size:52px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#94a3b8;
+    margin-bottom:30px;
+}
+
+textarea{
+    width:100%;
+    height:220px;
+    border:none;
+    outline:none;
+    border-radius:20px;
+    padding:20px;
+    background:#111827;
+    color:white;
+    font-size:18px;
+    resize:none;
+    box-shadow:0 0 15px rgba(37,99,235,0.4);
+}
+
+button{
+    margin-top:25px;
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 20px #2563eb;
+}
+
+.analytics-panel{
+    width:320px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.stat-card{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+}
+
+.stat-card h3{
+    color:#94a3b8;
+    margin-bottom:10px;
+}
+
+.chart-box{
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+}
